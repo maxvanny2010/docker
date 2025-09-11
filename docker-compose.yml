@@ -1,0 +1,18 @@
+services:
+  date:
+    image: mailtime2010/result-date
+    build:
+      dockerfile: date.dockerfile
+    #  ports:
+    #     - "3005:3005"   # если нужно достучаться к date с хоста
+  result:
+    image: mailtime2010/result
+    build: .
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    # environment:
+    #  - "DATE_SERVER_HOST=http://date:3005"
+    depends_on:
+      - date
