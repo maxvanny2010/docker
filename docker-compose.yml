@@ -2,6 +2,7 @@ services:
   date:
     image: mailtime2010/result-date
     build:
+      context: .
       dockerfile: date.dockerfile
     #  ports:
     #     - "3005:3005"   # если нужно достучаться к date с хоста
