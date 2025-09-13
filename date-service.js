@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 app.get('/', (req, res) => {
-	res.send(new Date());
+	res.json({ date: new Date().toISOString() });
 });
 
 app.listen(3005, () => {

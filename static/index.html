@@ -1,22 +1,29 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width,initial-scale=1"
-          name="viewport"/>
-    <title>Nginx — server status</title>
-    <link href="css/style.css"
-          rel="stylesheet"/>
-    <meta content="Greeting page / status Nginx"
-          name="description"/>
+	<meta charset="utf-8" />
+	<meta content="width=device-width,initial-scale=1" name="viewport" />
+	<title>Nginx — server status</title>
+	<link href="css/style.css" rel="stylesheet" />
+	<meta content="Greeting page / status Nginx" name="description" />
 </head>
 <body>
 <main class="page">
-    <div class="container">
-        <h1>Nginx is working 🚀</h1>
-        <p>Serve is started.</p>
-        <a href="/static">Update page</a>
-    </div>
+	<div class="container">
+		<h1>Nginx is working 🚀</h1>
+		<p>Current date from date-service: <span id="date">Loading...</span></p>
+		<a href="/">Update page</a>
+	</div>
 </main>
+<script>
+	fetch('/api/date')
+		.then(res => res.json())
+		.then(data => {
+			document.getElementById('date').textContent = data;
+		})
+		.catch(err => {
+			document.getElementById('date').textContent = 'Mistake: ' + err;
+		});
+</script>
 </body>
 </html>
