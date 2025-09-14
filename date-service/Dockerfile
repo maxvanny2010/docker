@@ -5,6 +5,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+RUN ls -la /app
 
 EXPOSE 3005
 CMD ["node", "date-service.js"]
