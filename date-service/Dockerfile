@@ -2,8 +2,6 @@
 FROM node:20 AS deps
 WORKDIR /app
 
-# Обновляем npm до стабильной версии
-RUN npm install -g npm@11
 
 # Копируем package.json и lock
 COPY package*.json ./

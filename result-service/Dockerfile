@@ -2,8 +2,6 @@
 FROM node:20 AS deps
 WORKDIR /app
 
-RUN npm install -g npm@11
-
 COPY package*.json ./
 RUN npm ci --omit=dev
 
