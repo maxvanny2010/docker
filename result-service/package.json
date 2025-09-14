@@ -2,7 +2,7 @@
   "name": "result-service",
   "version": "1.0.0",
   "description": "Result service renders HTML with date",
-  "main": "index.js",
+  "main": "result-service.js",
   "scripts": {
     "start": "node result-service.js"
   },
