@@ -1,26 +1,29 @@
 services:
   date:
-    image: mailtime2010/result-date
     build:
-      context: .
-      dockerfile: date.dockerfile
-    #  ports:
-    #     - "3005:3005"   # если нужно достучаться к date с хоста
+      context: ./date-service
+      dockerfile: Dockerfile
+    container_name: date-service
+
   result:
-    image: mailtime2010/result
-    build: .
+    build:
+      context: ./result-service
+      dockerfile: Dockerfile
+    container_name: result-service
     ports:
       - "3000:3000"
     env_file:
       - .env
-    # environment:
-    #  - "DATE_SERVER_HOST=http://date:3005"
     depends_on:
       - date
+
   nginx:
-    image: nginx
+    image: nginx:latest
+    container_name: nginx
     ports:
       - "80:80"
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - ./static:/static
+      - ./result-service/static:/static
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - result
