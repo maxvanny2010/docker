@@ -4,7 +4,7 @@
   "description": "Result service renders HTML with date",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node result-service.js"
   },
   "dependencies": {
     "express": "5.1.0",
