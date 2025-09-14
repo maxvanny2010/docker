@@ -1,7 +1,7 @@
 FROM node:20
 
 WORKDIR /app
-COPY ./result-service/package*.json ./
+COPY package*.json ./
 RUN npm ci
 
 COPY . .
