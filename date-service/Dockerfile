@@ -1,11 +1,10 @@
 FROM node:20
 
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+COPY ./date-service/package*.json ./
+RUN npm ci
 
 COPY . .
-RUN ls -la /app
 
 EXPOSE 3005
 CMD ["node", "date-service.js"]
