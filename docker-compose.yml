@@ -10,8 +10,6 @@ services:
       context: ./result-service
       dockerfile: Dockerfile
     container_name: result-service
-    ports:
-      - "3000:3000"
     env_file:
       - .env
     depends_on:
