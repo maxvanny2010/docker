@@ -31,6 +31,25 @@ services:
 
   certbot:
     image: certbot/certbot
+    container_name: certbot
     volumes:
       - ./certbot/www:/var/www/certbot
       - ./certbot/data:/etc/letsencrypt
+    # этот сервис используем только вручную для первого получения сертификата:
+    # docker compose run --rm certbot certonly ... file certbot
+
+  certbot-renew:
+    image: certbot/certbot
+    container_name: certbot-renew
+    volumes:
+      - ./certbot/www:/var/www/certbot
+      - ./certbot/data:/etc/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+    entrypoint: >
+      sh -c 'while :; do
+        certbot renew --webroot -w /var/www/certbot &&
+        docker exec nginx nginx -s reload;
+        sleep 12h;
+      done'
+    depends_on:
+      - nginx
