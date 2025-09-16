@@ -1,8 +1,8 @@
 FROM node:22.19.0-alpine3.22
 
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+COPY package.json package-lock.json ./
+COPY node_modules ./node_modules
 
 COPY . .
 
