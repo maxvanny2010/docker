@@ -1,4 +1,4 @@
-FROM node:trixie-slim
+FROM node:22.19.0-alpine3.22
 
 WORKDIR /app
 COPY package.json package-lock.json ./
