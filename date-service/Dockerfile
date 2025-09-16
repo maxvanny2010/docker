@@ -1,8 +1,8 @@
-FROM node:trixie-slim
+FROM node:20
 
 WORKDIR /app
-COPY package.json package-lock.json ./
-COPY node_modules ./node_modules
+COPY package*.json ./
+RUN npm ci
 
 COPY . .
 

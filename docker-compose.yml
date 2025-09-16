@@ -36,7 +36,7 @@ services:
       - ./certbot/www:/var/www/certbot
       - ./certbot/data:/etc/letsencrypt
     # этот сервис используем только вручную для первого получения сертификата:
-    # docker compose run --rm certbot certonly ... file certbot
+    # docker compose run --rm certbot certonly ...  файл certbot
 
   certbot-renew:
     image: certbot/certbot
