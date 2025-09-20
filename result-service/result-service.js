@@ -10,7 +10,7 @@ app.get('/', async (req, res) => {
     try {
         const response = await fetch(DATE_SERVER_HOST);
         const data = await response.json();
-        const formattedDate = new Date(data.date).toLocaleString("ru-RU", {
+        const formattedDate = new Date(data.date).toLocaleString("en-En", {
             weekday: "long",
             year: "numeric",
             month: "long",
@@ -28,6 +28,7 @@ app.get('/', async (req, res) => {
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <title>Result Service</title>
     <link href="/static/css/style.css" rel="stylesheet" />
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <main class="page">
