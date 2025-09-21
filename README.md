@@ -1,4 +1,9 @@
-## DOCKER
+## DOCKER SSR HTTPS
+
+
+#### [home]
+
+![home](./public/index.png)
 
 ### install Ubuntu
 
@@ -509,3 +514,61 @@ exit
 | 9   | `sudo journalctl -xeu docker.service --no-pager`                 | Выводит подробные логи сервиса Docker для отладки проблем при запуске.                             |
 | 10  | `docker --version`                                               | Проверяет, что установлен Docker корректно.                                                        |
 | 11  | `docker info`                                                    | Проверяет, что демон Docker работает и готов к использованию.                                      |
+
+
+```bash
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -q)
+docker volume ls
+docker volume prune
+```
+
+## Certification without a pipeline
+```yml
+EXEC_FOLDER="/path/to/your/project"
+cd $EXEC_FOLDER
+```
+### Шаг 1: Запуск Nginx с временной HTTP-конфигурацией
+```yml
+echo "Starting Nginx with HTTP config..."
+cp nginx/default_http.conf nginx/default.conf
+docker compose up -d nginx
+```
+
+### Шаг 2: Получение сертификата
+```yml
+echo "Running Certbot to get certificate..."
+docker compose run --rm certbot certonly --webroot -w /var/www/certbot -d yourdomain.com --email you@example.com --agree-tos --no-eff-email --non-interactive
+```
+#### Шаг 3: Перезапуск Nginx с HTTPS-конфигурацией
+```yml
+echo "Switching to HTTPS config and restarting Nginx..."
+cp nginx/default_https.conf nginx/default.conf
+docker compose restart nginx
+
+echo "Process completed."
+```
+### Script bash
+
+```yaml
+  #!/bin/bash
+  # Путь к вашей директории
+EXEC_FOLDER="/path/to/your/project"
+cd $EXEC_FOLDER
+  # Шаг 1: Запуск Nginx с временной HTTP-конфигурацией
+echo "Starting Nginx with HTTP config..."
+cp nginx/default_http.conf nginx/default.conf
+docker compose up -d nginx
+
+  # Шаг 2: Получение сертификата
+echo "Running Certbot to get certificate..."
+docker compose run --rm certbot certonly --webroot -w /var/www/certbot -d yourdomain.com --email you@example.com --agree-tos --no-eff-email --non-interactive
+
+  # Шаг 3: Перезапуск Nginx с HTTPS-конфигурацией
+echo "Switching to HTTPS config and restarting Nginx..."
+cp nginx/default_https.conf nginx/default.conf
+docker compose restart nginx
+
+echo "Process completed."
+```
