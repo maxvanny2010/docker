@@ -26,14 +26,14 @@ app.get('/', async (req, res) => {
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width,initial-scale=1" name="viewport" />
-    <title>Result Service</title>
+    <title>Result Service HTTPS</title>
     <link href="/static/css/style.css" rel="stylesheet" />
     <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <main class="page">
     <div class="container">
-        <h1>Result Service 🚀</h1>
+        <h1>Result Service SSR 🚀 HTTPS</h1>
         <p>Current date-time from date-service:</p>
         <p class="date-output">
              <span class="date-display">${formattedDate}</span>
